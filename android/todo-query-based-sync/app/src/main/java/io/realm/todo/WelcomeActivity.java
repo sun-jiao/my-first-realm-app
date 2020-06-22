@@ -22,7 +22,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +39,7 @@ import static io.realm.todo.Constants.AUTH_URL;
 public class WelcomeActivity extends AppCompatActivity {
 
     private EditText nicknameView;
+    private EditText passwordView;
     private View progressView;
     private View loginFormView;
 
@@ -53,6 +54,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         // Set up the login form.
         nicknameView = findViewById(R.id.nickname);
+        passwordView = findViewById(R.id.password);
         Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> attemptLogin());
         loginFormView = findViewById(R.id.login_form);
@@ -64,9 +66,10 @@ public class WelcomeActivity extends AppCompatActivity {
         nicknameView.setError(null);
         // Store values at the time of the login attempt.
         String nickname = nicknameView.getText().toString();
+        String password = passwordView.getText().toString();
         showProgress(true);
 
-        SyncCredentials credentials = SyncCredentials.nickname(nickname, true);
+        SyncCredentials credentials = SyncCredentials.usernamePassword(nickname, password);
         SyncUser.logInAsync(credentials, AUTH_URL, new SyncUser.Callback<SyncUser>() {
             @Override
             public void onSuccess(SyncUser user) {
