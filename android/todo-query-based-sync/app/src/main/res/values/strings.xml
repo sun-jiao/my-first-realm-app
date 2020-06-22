@@ -15,7 +15,6 @@
         completions."
     </string>
     <string name="nickname_hint">Select a username</string>
-    <string name="password_hint">Select a password</string>
 
     <!-- Other strings -->
     <string name="project_description">Project description</string>
